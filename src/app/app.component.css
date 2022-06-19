@@ -1,0 +1,29 @@
+.verde{
+    background-color: green;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
+.rojo{
+    background-color: red;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
+#capa3{
+    /*CIRCULO*/
+        height: 200px;
+        width: 200px;
+        display: table-cell;
+        vertical-align: middle;
+        border-radius: 50%;
+        background: #e6ac00;
+        font-size: 48px;
+    /*medidas*/
+        left: 80%;
+        bottom: 5%;
+        position: absolute;
+        display: inline-block;
+    }
