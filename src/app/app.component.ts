@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 // Importo el archivo JSON 
 import datos_peludos from 'src/assets/json/datos_peludos.json';
 
+
+
 //variables
-var datos: any;
 var isLicencia: string = "";
 var isCastrado: string = "";
 var isLeishmaniasis: string = "";
@@ -12,10 +13,14 @@ var isEnfermedades: string = "";
 var isTratamiento: string = "";
 var isCastrado: string = "";
 
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  
 
 })
 export class AppComponent {
@@ -32,7 +37,9 @@ export class AppComponent {
   form: boolean | undefined = false;
   aniadir: boolean | undefined;
   quitar: boolean | undefined;
-
+  profileForm: any;
+ 
+  nuevoPerro: any = {};
   licencia(licencia: any) {
 
     if (licencia.toLowerCase() === "si") {
@@ -102,9 +109,9 @@ export class AppComponent {
     this.datosPerros = false
     this.form = true
     this.quitar = false
-    this.aniadir = false; 
+    this.aniadir = false;
   }
-  
+
   aniadirPeludo() {
     this.form = false
     this.datosPerros = false
@@ -131,6 +138,7 @@ export class AppComponent {
     this.quitar = false
     this.form = false
   }
+
   cerrarQuitario() {
     this.datosPerros = true
     this.aniadir = false
@@ -138,5 +146,49 @@ export class AppComponent {
     this.form = false
   }
 
+  guardarNuevoPerrete(){
+    // se inserta el dato en el arreglo
+    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
+
+
+    // se crea un nuevo objeto para almacenar nuevos datos
+    this.nuevoPerrete = {};
+    
+    this.datosPerros = true
+    this.aniadir = false
+    this.quitar = false
+    this.form = false
+
+
+  }
+
+  mostrarPerro(perro: string) {
+    var mostrarperro: any;
+    datos_peludos.forEach(function (value: any) {
+      if (value.nombre.toLowerCase() == perro.toLowerCase()) {
+        mostrarperro = value
+      }
+    });
+  }
+
+ 
+
+
+
+  // los input del formulario se asocian con un modelo
+  nuevoPerrete:any = {};
+
+
+  guardar(){
+    // se inserta el dato en el arreglo
+    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
+
+
+    // se crea un nuevo objeto para almacenar nuevos datos
+    this.nuevoPerrete = {};
+  }
+
 }
+
+
 
