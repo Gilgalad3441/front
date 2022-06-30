@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 // Importo el archivo JSON 
 import datos_peludos from 'src/assets/json/datos_peludos.json';
-
+import {LocalStorageService} from 'ngx-webstorage';  
 
 
 //variables
@@ -20,10 +20,13 @@ var isCastrado: string = "";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+
   
 
 })
+ 
 export class AppComponent {
+
   title = 'pppeludos-web';
   datos: any = datos_peludos;
   ver_peludo: string = "Ver datos de los peludos";
@@ -38,11 +41,12 @@ export class AppComponent {
   aniadir: boolean | undefined;
   quitar: boolean | undefined;
   profileForm: any;
- 
   nuevoPerro: any = {};
+  nuevoPerrete:any = {};
+  
   licencia(licencia: any) {
 
-    if (licencia.toLowerCase() === "si") {
+    if (licencia && licencia.toLowerCase() === "si") {
       isLicencia = "badge badge-danger  rounded-pill d-inline";
     } else {
       isLicencia = "badge badge-success  rounded-pill d-inline";
@@ -150,15 +154,13 @@ export class AppComponent {
     // se inserta el dato en el arreglo
     JSON.stringify(datos_peludos.push(this.nuevoPerrete));
 
-
+    this.saveData(datos_peludos);
     // se crea un nuevo objeto para almacenar nuevos datos
-    this.nuevoPerrete = {};
-    
+    this.nuevoPerrete = {};    
     this.datosPerros = true
     this.aniadir = false
     this.quitar = false
     this.form = false
-
 
   }
 
@@ -171,21 +173,39 @@ export class AppComponent {
     });
   }
 
- 
-
-
-
-  // los input del formulario se asocian con un modelo
-  nuevoPerrete:any = {};
-
-
   guardar(){
     // se inserta el dato en el arreglo
     JSON.stringify(datos_peludos.push(this.nuevoPerrete));
 
 
+    
+
     // se crea un nuevo objeto para almacenar nuevos datos
     this.nuevoPerrete = {};
+  }
+  guardarFormulario(){
+    // se inserta el dato en el arreglo
+    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
+
+
+    
+
+    // se crea un nuevo objeto para almacenar nuevos datos
+    this.nuevoPerrete = {};
+  }
+
+  saveData(datos_peludos: string | { foto: string; nombre: string; donde_esta: string; numero_chip: string; fecha_nacimiento: string; licencia: string; raza: string; castrado: string; ultima_desparasitacion: string; vacuna_rabia: string; leishmaniasis: string; pendiente_operacion: string; enfermedades: string; tratamiento: string; }[]) {
+    sessionStorage.setItem('datos_peludos', JSON.stringify(datos_peludos));
+    
+  }
+  getData() {
+    return sessionStorage.getItem('datos_peludos');
+  }
+  removeData() {
+    sessionStorage.removeItem('datos_peludos');
+  }
+  deleteData() {
+    sessionStorage.clear();
   }
 
 }

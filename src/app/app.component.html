@@ -1,49 +1,41 @@
 <!-- Botones navegacion -->
 <th>
-    <button class="btn btn-warning mb-0" (click)="mostrarPerros()"style="width: 200px; height: 50px">{{ ver_peludo }}</button>
-    <img align="left" src="./assets/imagenes/logo.jpg" alt="" style="width: 50px; height: 50px" class="rounded-circle" />
-
+    <button class="btn btn-warning mb-0" (click)="mostrarPerros()" style="width: 200px; height: 50px">{{ ver_peludo
+        }}</button>
+    <img align="left" src="./assets/imagenes/logo.jpg" alt="" style="width: 50px; height: 50px"
+        class="rounded-circle" />
 </th>
 <th>
-    <button class="btn btn-primary mb-0" (click)="modificarPeludo()"style="width: 200px; height: 50px">{{ modificar_datos}}</button>
-
+    <button class="btn btn-primary mb-0" (click)="modificarPeludo()" style="width: 200px; height: 50px">{{
+        modificar_datos}}</button>
 </th>
 <th>
-    <button class="btn btn-success mb-0" (click)="aniadirPeludo()"style="width: 200px; height: 50px">{{ aniadir_peludo }}</button>
-
+    <button class="btn btn-success mb-0" (click)="aniadirPeludo()" style="width: 200px; height: 50px">{{ aniadir_peludo
+        }}</button>
 </th>
 <th>
-    <button class="btn btn-danger mb-0" (click)="quitarPeludo()"style="width: 200px; height: 50px">{{ quitar_peludo }}</button>
+    <button class="btn btn-danger mb-0" (click)="quitarPeludo()" style="width: 200px; height: 50px">{{ quitar_peludo
+        }}</button>
 
 </th>
 <!-- FIN Botones navegacion -->
 <!-- Datos perros -->
 <table class="table table-hover align-left mb-0 bg-white" *ngIf="datosPerros == true">
-    
+
     <thead class="bg-black">
-
         <tr>
-            <th> 
-
+            <th>
                 <label class="description" for="element_1">Selecciona el pppeludo </label>
-                    <div>
-
-                        <select class="element select medium" id="element_1" name="element_1">
-                            <option value="" selected="selected"></option>
-                            <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
-
-                            
-                        </select>
-                        
-                    </div>
-                    
-                    Datos del perrete
-
+                <div>
+                    <select class="element select medium" id="element_1" name="element_1">
+                        <option value="" selected="selected"></option>
+                        <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
+                    </select>
+                </div>
+                Datos del perrete
             </th>
             <th>Datos medicos</th>
             <th>
-                
-
             </th>
         </tr>
     </thead>
@@ -71,8 +63,8 @@
                 <p class="fw-normal mb-1"> Fecha vacuna rabia: {{peludo.vacuna_rabia}}</p>
             </td>
             <td align="left">
-                <p  class=""></p> Leishmaniasis <span  class=""
-                    [ngClass]="leishmaniasis(peludo.leishmaniasis)"> {{peludo.leishmaniasis}}</span>
+                <p class=""></p> Leishmaniasis <span class="" [ngClass]="leishmaniasis(peludo.leishmaniasis)">
+                    {{peludo.leishmaniasis}}</span>
                 <p class=""></p>Pendiente operar <span class=""
                     [ngClass]="pendienteOperar(peludo.pendiente_operacion)">{{peludo.pendiente_operacion}}</span>
                 <p class=""></p> Enfermedades <span class=""
@@ -86,9 +78,7 @@
 <!-- FIN Datos perros -->
 
 <!-- Formulario modificar datos -->
-<form class="table table-hover align-left mb-0 bg-white" *ngIf="form == true"  (click)="guardar()">
-
-  
+<form class="table table-hover align-left mb-0 bg-white" *ngIf="form == true">
     <thead class="bg-black">
         <tr>
             <th>Modifica los datos del perrete </th>
@@ -98,119 +88,129 @@
         </tr>
     </thead>
     <tbody>
-        <tr >
+        <tr>
             <td>
                 <div class="">
-
                     <label class="description" for="nombre">Nombre </label>
                     <div>
-
-                        <select class="element select medium" id="nombre" name="nombre" >
+                        <select class="element select medium" id="nombre" name="nombre"
+                            [(ngModel)]="nuevoPerrete.nombre">
                             <option value="" selected="selected"></option>
                             <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
                         </select>
                     </div>
-
                     <label class="description" for="raza">Raza </label>
                     <div>
-                        <input id="raza" name="element_2" class="element text medium" type="text" maxlength="255"
-                            value="raza" >
-                        
+                        <input id="raza" name="raza" class="element text medium" type="text" maxlength="255"
+                            value="raza" [(ngModel)]="nuevoPerrete.raza">
                     </div>
-
-                    <label class="description" for="element_3">Chip </label>
+                    <label class="description" for="numero_chip">Chip </label>
                     <div>
-                        <input id="element_3" name="element_3" class="element text small" type="text" maxlength="255"
-                            value="">
+                        <input id="numero_chip" name="numero_chip" class="element text small" type="text" maxlength="255"
+                            value="" [(ngModel)]="nuevoPerrete.numero_chip">
                     </div>
-
-                    <label class="description" for="element_4">Ubicación </label>
+                    <label class="description" for="donde_esta">Ubicación </label>
                     <div>
-                        <input id="element_4" name="element_4" class="element text small" type="text" maxlength="255"
-                            value="">
+                        <input id="donde_esta" name="donde_esta" class="element text small" type="text" maxlength="255"
+                            value="" [(ngModel)]="nuevoPerrete.donde_esta">
                     </div>
-
-                    <label class="description" for="element_7">Licencia </label>
+                    <label class="description" for="licencia">Licencia </label>
                     <div>
                         <div>
-
-                            <select class="element select medium" id="element_7" name="element_7">
+                            <select class="element select medium" id="licencia" name="licencia"
+                                [(ngModel)]="nuevoPerrete.licencia">
                                 <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
+                                <option>Si</option>
+                                <option>No</option>
                             </select>
                         </div>
                     </div>
-                    <label class="description" for="element_5">Fecha nacimiento (dd/mm/aaaa) </label>
+                    <label class="description" for="fecha_nacimiento">Fecha nacimiento (dd/mm/aaaa) </label>
                     <div>
-                        <input id="element_5" name="element_5" class="element text medium" type="text" maxlength="255"
-                            value="">
+                        <input id="fecha_nacimiento" name="fecha_nacimiento" class="element text medium" type="text" maxlength="255"
+                            value="" [(ngModel)]="nuevoPerrete.fecha_nacimiento">
                     </div>
-                    <label class="description" for="element_10">Foto </label>
-                    <form name="subida-imagenes" type="POST" enctype="src\app\assets\imagenes">
+                    <label class="description" for="foto">Foto </label>
+                    <form name="subida-imagenes" type="POST" enctype="src\app\assets\imagenes"
+                        [(ngModel)]="nuevoPerrete.foto">
                         <input type="file" name="imagen" />
                     </form>
                 </div>
-
             </td>
-
             <td>
                 <div class="">
                     <div class="ms-0">
-                        <label class="description" for="element_5">Fecha desparasitación (dd/mm/aaaa) </label>
+                        <label class="description" for="ultima_desparasitacion">Fecha desparasitación (dd/mm/aaaa) </label>
                         <div>
-                            <input id="element_5" name="element_5" class="element text medium" type="text"
-                                maxlength="255" value="">
+                            <input id="ultima_desparasitacion" name="ultima_desparasitacion" class="element text medium" type="text"
+                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.ultima_desparasitacion">
                         </div>
 
-                        <label class="description" for="element_6">Fecha vacuna rabia(dd/mm/aaaa) </label>
+                        <label class="description" for="vacuna_rabia">Fecha vacuna rabia(dd/mm/aaaa) </label>
                         <div>
-                            <input id="element_6" name="element_6" class="element text medium" type="text"
-                                maxlength="255" value="">
+                            <input id="vacuna_rabia" name="vacuna_rabia" class="element text medium" type="text"
+                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.vacuna_rabia">
                         </div>
                         <div>
-                        <label class="description" for="element_8">Castrado </label>
-                        <span>
-                            <select class="element select medium" id="element_8" name="element_8">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
+                            <label class="description" for="element_8">Castrado </label>
+                            <span>
+                                <select class="element select medium" id="castrado" name="element_8" [(ngModel)]="nuevoPerrete.castrado">
+                                    <option value="" selected="selected" ></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
 
-
-                    </div>
-                    <div>
-
-                        <label class="description" for="element_9">Leishmaniasis </label>
-                        <span>
-                            <select class="element select medium" id="element_9" name="element_9">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div>
-                        <label class="description" for="element_10">Pendiente operar </label>
-                        <span>
-                            <select class="element select medium" id="element_10" name="element_10">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-                    
-                        <input type="hidden" name="form_id" value="40616">
-
+                            <label class="description" for="leishmaniasis">Leishmaniasis </label>
+                            <span>
+                                <select class="element select medium" id="leishmaniasis" name="leishmaniasis" [(ngModel)]="nuevoPerrete.leishmaniasis">
+                                    <option value="" selected="selected" ></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="pendiente_operacion">Pendiente operar </label>
+                            <span>
+                                <select class="element select medium" id="pendiente_operacion" name="pendiente_operacion" [(ngModel)]="nuevoPerrete.pendiente_operacion">
+                                    <option value="" selected="selected" ></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="enfermedades">Enfermedades </label>
+                            <span>
+                                <select class="element select medium" id="enfermedades" name="enfermedades"
+                                    [(ngModel)]="nuevoPerrete.enfermedades">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="tratamiento">Tratamiento </label>
+                            <span>
+                                <select class="element select medium" id="tratamiento" name="tratamiento"
+                                    [(ngModel)]="nuevoPerrete.tratamiento">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </td>
         </tr>
         <tr>
             <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Guardar datos"
-                (click)="cerrarFormulario()">
+                (click)="guardarFormulario()">
         </tr>
     </tbody>
 </form>
@@ -227,16 +227,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr >
+        <tr>
             <td>
                 <div class="">
                     <label class="description" for="nombre">Nombre </label>
                     <div>
-                        <input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255" value="" [(ngModel)]="nuevoPerrete.nombre">
-                        
-                        
-                            
-                    
+                        <input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255"
+                            value="" [(ngModel)]="nuevoPerrete.nombre">
                     </div>
 
                     <label class="description" for="raza">Raza </label>
@@ -254,115 +251,108 @@
                     <label class="description" for="ubicacion">Ubicación </label>
                     <div>
                         <input id="ubicacion" name="ubicacion" class="element text small" type="text" maxlength="255"
-                            value=""[(ngModel)]="nuevoPerrete.donde_esta">
+                            value="" [(ngModel)]="nuevoPerrete.donde_esta">
                     </div>
 
                     <label class="description" for="licencia">Licencia </label>
                     <div>
                         <div>
 
-                            <select class="element select medium" id="licencia" name="licencia" [(ngModel)]="nuevoPerrete.licencia">
+                            <select class="element select medium" id="licencia" name="licencia"
+                                [(ngModel)]="nuevoPerrete.licencia">
                                 <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
+                                <option>Si</option>
+                                <option>No</option>
                             </select>
                         </div>
                     </div>
                     <label class="description" for="fecha_nacimiento">Fecha nacimiento (dd/mm/aaaa) </label>
                     <div>
-                        <input id="fecha_nacimiento" name="fecha_nacimiento" class="element text medium" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.fecha_nacimiento">
+                        <input id="fecha_nacimiento" name="fecha_nacimiento" class="element text medium" type="text"
+                            maxlength="255" value="" [(ngModel)]="nuevoPerrete.fecha_nacimiento">
                     </div>
                     <label class="description" for="foto">Foto </label>
                     <form name="subida-imagenes" type="POST" enctype="src\app\assets\imagenes">
                         <input type="file" name="imagen" [(ngModel)]="nuevoPerrete.foto">
                     </form>
                 </div>
-                
-
             </td>
-
             <td>
                 <div class="">
                     <div class="ms-0">
-                        <label class="description" for="ultima_desparasitacion">Fecha desparasitación (dd/mm/aaaa) </label>
+                        <label class="description" for="ultima_desparasitacion">Fecha desparasitación (dd/mm/aaaa)
+                        </label>
                         <div>
-                            <input id="ultima_desparasitacion" name="ultima_desparasitacion" class="element text medium" type="text"
-                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.ultima_desparasitacion">
+                            <input id="ultima_desparasitacion" name="ultima_desparasitacion" class="element text medium"
+                                type="text" maxlength="255" value="" [(ngModel)]="nuevoPerrete.ultima_desparasitacion">
                         </div>
-
                         <label class="description" for="vacuna_rabia">Fecha vacuna rabia(dd/mm/aaaa) </label>
                         <div>
                             <input id="vacuna_rabia" name="vacuna_rabia" class="element text medium" type="text"
                                 maxlength="255" value="" [(ngModel)]="nuevoPerrete.vacuna_rabia">
                         </div>
                         <div>
-                        <label class="description" for="castrado">Castrado </label>
-                        <span>
-                            <select class="element select medium" id="castrado" name="castrado"[(ngModel)]="nuevoPerrete.castrado">
-                                <option value="" selected="selected"></option  >
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-
-
-                    </div>
-                    <div>
-
-                        <label class="description" for="leishmaniasis">Leishmaniasis </label>
-                        <span>
-                            <select class="element select medium" id="leishmaniasis" name="leishmaniasis" [(ngModel)]="nuevoPerrete.leishmaniasis">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div>
-                        <label class="description" for="pendiente_operacion">Pendiente operar </label>
-                        <span>
-                            <select class="element select medium" id="pendiente_operacion" name="pendiente_operacion" [(ngModel)]="nuevoPerrete.pendiente_operacion">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-                    
-                    <div>
-                        <label class="description" for="enfermedades">Enfermedades </label>
-                        <span>
-                            <select class="element select medium" id="enfermedades" name="enfermedades" [(ngModel)]="nuevoPerrete.enfermedades">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div>
-                        <label class="description" for="tratamiento">Tratamiento </label>
-                        <span>
-                            <select class="element select medium" id="tratamiento" name="tratamiento" [(ngModel)]="nuevoPerrete.tratamiento">
-                                <option value="" selected="selected"></option>
-                                <option >Si</option>
-                                <option >No</option>
-                            </select>
-                        </span>
-                    </div>
-
+                            <label class="description" for="castrado">Castrado </label>
+                            <span>
+                                <select class="element select medium" id="castrado" name="castrado"
+                                    [(ngModel)]="nuevoPerrete.castrado">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="leishmaniasis">Leishmaniasis </label>
+                            <span>
+                                <select class="element select medium" id="leishmaniasis" name="leishmaniasis"
+                                    [(ngModel)]="nuevoPerrete.leishmaniasis">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="pendiente_operacion">Pendiente operar </label>
+                            <span>
+                                <select class="element select medium" id="pendiente_operacion"
+                                    name="pendiente_operacion" [(ngModel)]="nuevoPerrete.pendiente_operacion">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="enfermedades">Enfermedades </label>
+                            <span>
+                                <select class="element select medium" id="enfermedades" name="enfermedades"
+                                    [(ngModel)]="nuevoPerrete.enfermedades">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div>
+                            <label class="description" for="tratamiento">Tratamiento </label>
+                            <span>
+                                <select class="element select medium" id="tratamiento" name="tratamiento"
+                                    [(ngModel)]="nuevoPerrete.tratamiento">
+                                    <option value="" selected="selected"></option>
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </td>
         </tr>
         <tr>
-            <input 
-                            class="btn btn-success mb-2" 
-                            id="saveForm" 
-                            type="button" 
-                            name="submit" 
-                            value="Guardar datos"
-                            (click)="guardarNuevoPerrete()">
+            <input class="btn btn-success mb-2" id="saveForm" type="button" name="submit" value="Guardar datos"
+                (click)="guardarNuevoPerrete()">
         </tr>
     </tbody>
 </form>
@@ -378,13 +368,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr >
+        <tr>
             <td>
                 <div class="">
-
                     <label class="description" for="element_1">Nombre </label>
                     <div>
-
                         <select class="element select medium" id="element_1" name="element_1">
                             <option value="" selected="selected"></option>
                             <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
@@ -392,7 +380,6 @@
                     </div>
                 </div>
             </td>
-
         </tr>
         <tr>
             <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Guardar datos"
