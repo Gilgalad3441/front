@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 // Importo el archivo JSON 
 import datos_peludos from 'src/assets/json/datos_peludos.json';
-import {LocalStorageService} from 'ngx-webstorage';  
+import { DatosPerrosService } from 'src/app/app.service';
 
 
 //variables
@@ -26,9 +26,10 @@ var isCastrado: string = "";
 })
  
 export class AppComponent {
+  [x: string]: any;
 
   title = 'pppeludos-web';
-  datos: any = datos_peludos;
+  datos: any = {};
   ver_peludo: string = "Ver datos de los peludos";
   modificar_datos: string = "Modificar datos";
   aniadir_peludo: string = "Añadir peludo";
@@ -43,7 +44,11 @@ export class AppComponent {
   profileForm: any;
   nuevoPerro: any = {};
   nuevoPerrete:any = {};
-  
+  idPerroBBDD: any;
+  ngOnInit() {
+    this.mostrarPerros();
+  }
+
   licencia(licencia: any) {
 
     if (licencia && licencia.toLowerCase() === "si") {
@@ -102,12 +107,7 @@ export class AppComponent {
     return isTratamiento;
   }
 
-  mostrarPerros() {
-    this.datosPerros = true
-    this.form = false
-    this.quitar = false
-    this.aniadir = false;
-  }
+  
 
   modificarPeludo() {
     this.datosPerros = false
@@ -150,65 +150,43 @@ export class AppComponent {
     this.form = false
   }
 
+  //invocamos al api crearPerro
+  constructor(private DatosPerrosService: DatosPerrosService){}
   guardarNuevoPerrete(){
-    // se inserta el dato en el arreglo
-    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
+    
+    //Invocar endpoint crearPerro
+    this.DatosPerrosService.crearPerro(this.nuevoPerrete).subscribe(response => {
 
-    this.saveData(datos_peludos);
-    // se crea un nuevo objeto para almacenar nuevos datos
+    });
     this.nuevoPerrete = {};    
     this.datosPerros = true
     this.aniadir = false
     this.quitar = false
     this.form = false
-
+    this.mostrarPerros();
   }
 
-  mostrarPerro(perro: string) {
-    var mostrarperro: any;
-    datos_peludos.forEach(function (value: any) {
-      if (value.nombre.toLowerCase() == perro.toLowerCase()) {
-        mostrarperro = value
-      }
+  //Invocamos el endpoint listaPerros
+  mostrarPerros() {
+    var  getResponse: any;
+    
+    getResponse =  this.DatosPerrosService.listaPerros().subscribe(response => {
+
+      this.datos = response;
+    })
+    this.datosPerros = true
+    this.form = false
+    this.quitar = false
+    this.aniadir = false;
+  }
+
+  quitarPerrete(idPerroBBDD: any){   
+    this.DatosPerrosService.borrarPerro(idPerroBBDD).subscribe(response => {
     });
-  }
-
-  guardar(){
-    // se inserta el dato en el arreglo
-    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
-
-
+    this.form = false
+    this.mostrarPerros();
+    this.cerrarQuitario();
     
-
-    // se crea un nuevo objeto para almacenar nuevos datos
-    this.nuevoPerrete = {};
-  }
-  guardarFormulario(){
-    // se inserta el dato en el arreglo
-    JSON.stringify(datos_peludos.push(this.nuevoPerrete));
-
-
-    
-
-    // se crea un nuevo objeto para almacenar nuevos datos
-    this.nuevoPerrete = {};
-  }
-
-  saveData(datos_peludos: string | { foto: string; nombre: string; donde_esta: string; numero_chip: string; fecha_nacimiento: string; licencia: string; raza: string; castrado: string; ultima_desparasitacion: string; vacuna_rabia: string; leishmaniasis: string; pendiente_operacion: string; enfermedades: string; tratamiento: string; }[]) {
-    sessionStorage.setItem('datos_peludos', JSON.stringify(datos_peludos));
-    
-  }
-  getData() {
-    return sessionStorage.getItem('datos_peludos');
-  }
-  removeData() {
-    sessionStorage.removeItem('datos_peludos');
-  }
-  deleteData() {
-    sessionStorage.clear();
   }
 
 }
-
-
-

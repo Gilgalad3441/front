@@ -16,7 +16,6 @@
 <th>
     <button class="btn btn-danger mb-0" (click)="quitarPeludo()" style="width: 200px; height: 50px">{{ quitar_peludo
         }}</button>
-
 </th>
 <!-- FIN Botones navegacion -->
 <!-- Datos perros -->
@@ -210,11 +209,11 @@
         </tr>
         <tr>
             <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Guardar datos"
-                (click)="guardarFormulario()">
+             (click)="guardarNuevoPerrete()">
         </tr>
     </tbody>
 </form>
-<!-- FIN Formulario modificar datos -->
+<!-- FIN Formulario modificar peludo -->
 
 <!-- Formulario añadir peludo -->
 <form class="table table-hover align-left mb-0 bg-white" *ngIf="aniadir == true">
@@ -373,17 +372,14 @@
                 <div class="">
                     <label class="description" for="element_1">Nombre </label>
                     <div>
-                        <select class="element select medium" id="element_1" name="element_1">
-                            <option value="" selected="selected"></option>
-                            <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
-                        </select>
+                        <tr *ngFor="let peludo of datos">
+                            <p class="">{{peludo.nombre    }}  <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Eliminar"
+                                (click)="quitarPerrete(peludo.idDatosPerros)">
+                            </p>
+                        </tr>
                     </div>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Guardar datos"
-                (click)="guardarNuevoPerrete()">
         </tr>
     </tbody>
 </form>
