@@ -1,5 +1,6 @@
 [
   {
+    "idDatosPerros":"0",
     "foto":"",
     "nombre": "Hercules",
     "donde_esta": "Acogida",
@@ -16,6 +17,7 @@
     "tratamiento": "No"
   },
   {
+    "idDatosPerros":"3",
     "foto":"",
     "nombre": "Zipi",
     "donde_esta": "Acogida",
@@ -33,6 +35,7 @@
   }
   ,
   {
+    "idDatosPerros":"1",
     "foto":"",
     "nombre": "Artiz",
     "donde_esta": "Acogida",
@@ -50,6 +53,7 @@
   }
   ,
   {
+    "idDatosPerros":"2",
     "foto":"",
     "nombre": "Kira",
     "donde_esta": "Acogida",

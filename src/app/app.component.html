@@ -1,386 +1,667 @@
 <!-- Botones navegacion -->
 <th>
-    <button class="btn btn-warning mb-0" (click)="mostrarPerros()" style="width: 200px; height: 50px">{{ ver_peludo
-        }}</button>
-    <img align="left" src="./assets/imagenes/logo.jpg" alt="" style="width: 50px; height: 50px"
-        class="rounded-circle" />
+  <button
+    class="btn btn-warning mb-0"
+    (click)="mostrarPerros()"
+    style="width: 200px; height: 50px"
+  >
+    {{ ver_peludo }}
+  </button>
+  <img
+    align="left"
+    src="./assets/imagenes/logo.jpg"
+    alt=""
+    style="width: 50px; height: 50px"
+    class="rounded-circle"
+  />
 </th>
 <th>
-    <button class="btn btn-primary mb-0" (click)="modificarPeludo()" style="width: 200px; height: 50px">{{
-        modificar_datos}}</button>
+  <button
+    class="btn btn-primary mb-0"
+    (click)="modificarPeludo()"
+    style="width: 200px; height: 50px"
+  >
+    {{ modificar_datos }}
+  </button>
 </th>
 <th>
-    <button class="btn btn-success mb-0" (click)="aniadirPeludo()" style="width: 200px; height: 50px">{{ aniadir_peludo
-        }}</button>
+  <button
+    class="btn btn-success mb-0"
+    (click)="aniadirPeludo()"
+    style="width: 200px; height: 50px"
+  >
+    {{ aniadir_peludo }}
+  </button>
 </th>
 <th>
-    <button class="btn btn-danger mb-0" (click)="quitarPeludo()" style="width: 200px; height: 50px">{{ quitar_peludo
-        }}</button>
+  <button
+    class="btn btn-danger mb-0"
+    (click)="quitarPeludo()"
+    style="width: 200px; height: 50px"
+  >
+    {{ quitar_peludo }}
+  </button>
 </th>
 <!-- FIN Botones navegacion -->
 <!-- Datos perros -->
-<table class="table table-hover align-left mb-0 bg-white" *ngIf="datosPerros == true">
-
-    <thead class="bg-black">
-        <tr>
-            <th>
-                <label class="description" for="element_1">Selecciona el pppeludo </label>
-                <div>
-                    <select class="element select medium" id="element_1" name="element_1">
-                        <option value="" selected="selected"></option>
-                        <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
-                    </select>
-                </div>
-                Datos del perrete
-            </th>
-            <th>Datos medicos</th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let peludo of datos">
-            <td>
-                <div class="">
-                    <div class="ms-0">
-                        <img align="left" src="./assets/imagenes/logo.jpg" alt="" style="width: 200px; height: 200px"
-                            class="rounded-circle" />
-                        <div align="right" class="ms-1 align-items-center">
-                            <p class="">{{peludo.nombre}} - {{peludo.raza}} - {{peludo.donde_esta}}</p>
-                            <p class="">Nº de chip: {{peludo.numero_chip}}</p>
-                            <p class="">Fecha de nacimiento: {{peludo.fecha_nacimiento}}</p>
-                            <p class="" [ngClass]="licencia(peludo.licencia)"> {{peludo.licencia}} necesita licencia
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class=""></p> Castrado <span class=""
-                    [ngClass]="castrado(peludo.castrado)">{{peludo.castrado}}</span>
-                <p class="fw-normal mb-1"> Fecha desparasitacion: {{peludo.ultima_desparasitacion}}</p>
-                <p class="fw-normal mb-1"> Fecha vacuna rabia: {{peludo.vacuna_rabia}}</p>
-            </td>
-            <td align="left">
-                <p class=""></p> Leishmaniasis <span class="" [ngClass]="leishmaniasis(peludo.leishmaniasis)">
-                    {{peludo.leishmaniasis}}</span>
-                <p class=""></p>Pendiente operar <span class=""
-                    [ngClass]="pendienteOperar(peludo.pendiente_operacion)">{{peludo.pendiente_operacion}}</span>
-                <p class=""></p> Enfermedades <span class=""
-                    [ngClass]="enfermedades(peludo.enfermedades)">{{peludo.enfermedades}}</span>
-                <p class=""></p> Tratamiento <span class="" class=""
-                    [ngClass]="tratamiento(peludo.tratamiento)">{{peludo.tratamiento}}</span>
-            </td>
-        </tr>
-    </tbody>
+<table
+  class="table table-hover align-left mb-0 bg-white"
+  *ngIf="datosPerros == true"
+>
+  <thead class="bg-black">
+    <tr>
+      <th>
+        <label class="description" for="element">Selecciona el pppeludo </label>
+        <div>
+          <select class="element select medium" id="element" name="element">
+            <option value="" selected="selected"></option>
+            <option *ngFor="let peludo of datos">{{ peludo.nombre }}</option>
+          </select>
+        </div>
+        Datos del perrete
+      </th>
+      <th>Datos medicos</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let peludo of datos">
+      <td>
+        <div class="">
+          <div class="ms-0">
+            <img
+              align="left"
+              src="./assets/imagenes/logo.jpg"
+              alt=""
+              style="width: 200px; height: 200px"
+              class="rounded-circle"
+            />
+            <div align="right" class="ms-1 align-items-center">
+              <p class="">
+                {{ peludo.nombre }} - {{ peludo.raza }} -
+                {{ peludo.donde_esta }}
+              </p>
+              <p class="">Nº de chip: {{ peludo.numero_chip }}</p>
+              <p class="">Fecha de nacimiento: {{ peludo.fecha_nacimiento }}</p>
+              <p class="" [ngClass]="licencia(peludo.licencia)">
+                {{ peludo.licencia }} necesita licencia
+              </p>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class=""></p>
+        Castrado
+        <span class="" [ngClass]="castrado(peludo.castrado)">{{
+          peludo.castrado
+        }}</span>
+        <p class="fw-normal mb-1">
+          Fecha desparasitacion: {{ peludo.ultima_desparasitacion }}
+        </p>
+        <p class="fw-normal mb-1">
+          Fecha vacuna rabia: {{ peludo.vacuna_rabia }}
+        </p>
+      </td>
+      <td align="left">
+        <p class=""></p>
+        Leishmaniasis
+        <span class="" [ngClass]="leishmaniasis(peludo.leishmaniasis)">
+          {{ peludo.leishmaniasis }}</span
+        >
+        <p class=""></p>
+        Pendiente operar
+        <span
+          class=""
+          [ngClass]="pendienteOperar(peludo.pendiente_operacion)"
+          >{{ peludo.pendiente_operacion }}</span
+        >
+        <p class=""></p>
+        Enfermedades
+        <span class="" [ngClass]="enfermedades(peludo.enfermedades)">{{
+          peludo.enfermedades
+        }}</span>
+        <p class=""></p>
+        Tratamiento
+        <span class="" class="" [ngClass]="tratamiento(peludo.tratamiento)">{{
+          peludo.tratamiento
+        }}</span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <!-- FIN Datos perros -->
 
 <!-- Formulario modificar datos -->
 <form class="table table-hover align-left mb-0 bg-white" *ngIf="form == true">
-    <thead class="bg-black">
-        <tr>
-            <th>Modifica los datos del perrete </th>
-            <th>Modifica los datos medicos</th>
-            <th><button class="btn btn-danger mb-2" (click)="cerrarFormulario()">Cerrar formulario sin guardar</button>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <div class="">
-                    <label class="description" for="nombre">Nombre </label>
-                    <div>
-                        <select class="element select medium" id="nombre" name="nombre"
-                            [(ngModel)]="nuevoPerrete.nombre">
-                            <option value="" selected="selected"></option>
-                            <option *ngFor="let peludo of datos">{{peludo.nombre}}</option>
-                        </select>
-                    </div>
-                    <label class="description" for="raza">Raza </label>
-                    <div>
-                        <input id="raza" name="raza" class="element text medium" type="text" maxlength="255"
-                            value="raza" [(ngModel)]="nuevoPerrete.raza">
-                    </div>
-                    <label class="description" for="numero_chip">Chip </label>
-                    <div>
-                        <input id="numero_chip" name="numero_chip" class="element text small" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.numero_chip">
-                    </div>
-                    <label class="description" for="donde_esta">Ubicación </label>
-                    <div>
-                        <input id="donde_esta" name="donde_esta" class="element text small" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.donde_esta">
-                    </div>
-                    <label class="description" for="licencia">Licencia </label>
-                    <div>
-                        <div>
-                            <select class="element select medium" id="licencia" name="licencia"
-                                [(ngModel)]="nuevoPerrete.licencia">
-                                <option value="" selected="selected"></option>
-                                <option>Si</option>
-                                <option>No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <label class="description" for="fecha_nacimiento">Fecha nacimiento (dd/mm/aaaa) </label>
-                    <div>
-                        <input id="fecha_nacimiento" name="fecha_nacimiento" class="element text medium" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.fecha_nacimiento">
-                    </div>
-                    <label class="description" for="foto">Foto </label>
-                    <form name="subida-imagenes" type="POST" enctype="src\app\assets\imagenes"
-                        [(ngModel)]="nuevoPerrete.foto">
-                        <input type="file" name="imagen" />
-                    </form>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="ms-0">
-                        <label class="description" for="ultima_desparasitacion">Fecha desparasitación (dd/mm/aaaa) </label>
-                        <div>
-                            <input id="ultima_desparasitacion" name="ultima_desparasitacion" class="element text medium" type="text"
-                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.ultima_desparasitacion">
-                        </div>
+  <tr>
+    <th>Modifica los datos del perrete</th>
+    <th>Modifica los datos medicos</th>
+    <th>
+      <button class="btn btn-danger mb-2" (click)="cerrarFormulario()">
+        Cerrar formulario sin guardar
+      </button>
+    </th>
+  </tr>
+  <tbody>
+    <tr>
+      <td>
+        <div class="">
+          <label class="description" for="element_modificar"
+            >Selecciona el perrete a modificar
+          </label>
+          <div>
+            <select
+              id="nombre"
+              name="nombre"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value="nombre"
+              [(ngModel)]="actualizarPerrete.nombre"
+            >
+              <option></option>
+              <option *ngFor="let perrete of datos">
+                {{ perrete.nombre }}
+              </option>
+            </select>
+          </div>
+          <label class="description" for="nombre">Nombre </label>
+          <div>
+            <input
+              id="nombre"
+              name="nombre"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value="nombre"
+              [(ngModel)]="actualizarPerrete.nombre"
+            />
+          </div>
 
-                        <label class="description" for="vacuna_rabia">Fecha vacuna rabia(dd/mm/aaaa) </label>
-                        <div>
-                            <input id="vacuna_rabia" name="vacuna_rabia" class="element text medium" type="text"
-                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.vacuna_rabia">
-                        </div>
-                        <div>
-                            <label class="description" for="element_8">Castrado </label>
-                            <span>
-                                <select class="element select medium" id="castrado" name="element_8" [(ngModel)]="nuevoPerrete.castrado">
-                                    <option value="" selected="selected" ></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
+          <label class="description" for="raza">Raza </label>
+          <div>
+            <input
+              id="raza"
+              name="raza"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value="raza"
+              [(ngModel)]="actualizarPerrete.raza"
+              placeholder="this.datoPerroActualizar.raza"
+            />
+          </div>
+          <label class="description" for="numero_chip">Chip </label>
+          <div>
+            <input
+              id="numero_chip"
+              name="numero_chip"
+              class="element text small"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="actualizarPerrete.numero_chip"
+            />
+          </div>
+          <label class="description" for="donde_esta">Ubicación </label>
+          <div>
+            <input
+              id="donde_esta"
+              name="donde_esta"
+              class="element text small"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="actualizarPerrete.donde_esta"
+            />
+          </div>
+          <label class="description" for="licencia">Licencia </label>
+          <div>
+            <div>
+              <select
+                class="element select medium"
+                id="licencia"
+                name="licencia"
+                [(ngModel)]="actualizarPerrete.licencia"
+              >
+                <option value="" selected="selected"></option>
+                <option>Si</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <label class="description" for="fecha_nacimiento"
+            >Fecha nacimiento (dd/mm/aaaa)
+          </label>
+          <div>
+            <input
+              id="fecha_nacimiento"
+              name="fecha_nacimiento"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="actualizarPerrete.fecha_nacimiento"
+            />
+          </div>
+          <label class="description" for="foto">Foto </label>
+          <form
+            name="subida-imagenes"
+            type="POST"
+            enctype="src\app\assets\imagenes"
+            [(ngModel)]="actualizarPerrete.foto"
+          >
+            <input type="file" name="imagen" />
+          </form>
+        </div>
+      </td>
+      <td>
+        <div class="">
+          <div class="ms-0">
+            <label class="description" for="ultima_desparasitacion"
+              >Fecha desparasitación (dd/mm/aaaa)
+            </label>
+            <div>
+              <input
+                id="ultima_desparasitacion"
+                name="ultima_desparasitacion"
+                class="element text medium"
+                type="text"
+                maxlength="255"
+                value=""
+                [(ngModel)]="actualizarPerrete.ultima_desparasitacion"
+              />
+            </div>
 
-                            <label class="description" for="leishmaniasis">Leishmaniasis </label>
-                            <span>
-                                <select class="element select medium" id="leishmaniasis" name="leishmaniasis" [(ngModel)]="nuevoPerrete.leishmaniasis">
-                                    <option value="" selected="selected" ></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="pendiente_operacion">Pendiente operar </label>
-                            <span>
-                                <select class="element select medium" id="pendiente_operacion" name="pendiente_operacion" [(ngModel)]="nuevoPerrete.pendiente_operacion">
-                                    <option value="" selected="selected" ></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="enfermedades">Enfermedades </label>
-                            <span>
-                                <select class="element select medium" id="enfermedades" name="enfermedades"
-                                    [(ngModel)]="nuevoPerrete.enfermedades">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="tratamiento">Tratamiento </label>
-                            <span>
-                                <select class="element select medium" id="tratamiento" name="tratamiento"
-                                    [(ngModel)]="nuevoPerrete.tratamiento">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Guardar datos"
-             (click)="guardarNuevoPerrete()">
-        </tr>
-    </tbody>
+            <label class="description" for="vacuna_rabia"
+              >Fecha vacuna rabia(dd/mm/aaaa)
+            </label>
+            <div>
+              <input
+                id="vacuna_rabia"
+                name="vacuna_rabia"
+                class="element text medium"
+                type="text"
+                maxlength="255"
+                value=""
+                [(ngModel)]="actualizarPerrete.vacuna_rabia"
+              />
+            </div>
+            <div>
+              <label class="description" for="castrado">Castrado </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="castrado"
+                  name="castrado"
+                  [(ngModel)]="actualizarPerrete.castrado"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="leishmaniasis"
+                >Leishmaniasis
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="leishmaniasis"
+                  name="leishmaniasis"
+                  [(ngModel)]="actualizarPerrete.leishmaniasis"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="pendiente_operacion"
+                >Pendiente operar
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="pendiente_operacion"
+                  name="pendiente_operacion"
+                  [(ngModel)]="actualizarPerrete.pendiente_operacion"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="enfermedades"
+                >Enfermedades
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="enfermedades"
+                  name="enfermedades"
+                  [(ngModel)]="actualizarPerrete.enfermedades"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="tratamiento">Tratamiento </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="tratamiento"
+                  name="tratamiento"
+                  [(ngModel)]="actualizarPerrete.tratamiento"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <input
+        class="btn btn-success mb-2"
+        id="saveForm"
+        type="submit"
+        name="submit"
+        value="Guardar datos"
+        (click)="actualizarPerretes()"
+      />
+    </tr>
+  </tbody>
 </form>
 <!-- FIN Formulario modificar peludo -->
-
 <!-- Formulario añadir peludo -->
-<form class="table table-hover align-left mb-0 bg-white" *ngIf="aniadir == true">
-    <thead class="bg-black">
-        <tr>
-            <th>Añade los datos del perrete</th>
-            <th>Añade los datos medicos</th>
-            <th><button class="btn btn-danger mb-2" (click)="cerrarFormulario()">Cerrar formulario sin guardar</button>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <div class="">
-                    <label class="description" for="nombre">Nombre </label>
-                    <div>
-                        <input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.nombre">
-                    </div>
+<form
+  class="table table-hover align-left mb-0 bg-white"
+  *ngIf="aniadir == true"
+>
+  <thead class="bg-black">
+    <tr>
+      <th>Añade los datos del perrete</th>
+      <th>Añade los datos medicos</th>
+      <th>
+        <button class="btn btn-danger mb-2" (click)="cerrarFormulario()">
+          Cerrar formulario sin guardar
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="">
+          <label class="description" for="nombre">Nombre </label>
+          <div>
+            <input
+              id="nombre"
+              name="nombre"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="nuevoPerrete.nombre"
+            />
+          </div>
 
-                    <label class="description" for="raza">Raza </label>
-                    <div>
-                        <input id="raza" name="element_2" class="element text medium" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.raza">
-                    </div>
+          <label class="description" for="raza">Raza </label>
+          <div>
+            <input
+              id="raza"
+              name="element_2"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="nuevoPerrete.raza"
+            />
+          </div>
 
-                    <label class="description" for="chip">Chip </label>
-                    <div>
-                        <input id="chip" name="element_3" class="element text small" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.numero_chip">
-                    </div>
+          <label class="description" for="chip">Chip </label>
+          <div>
+            <input
+              id="chip"
+              name="element_3"
+              class="element text small"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="nuevoPerrete.numero_chip"
+            />
+          </div>
 
-                    <label class="description" for="ubicacion">Ubicación </label>
-                    <div>
-                        <input id="ubicacion" name="ubicacion" class="element text small" type="text" maxlength="255"
-                            value="" [(ngModel)]="nuevoPerrete.donde_esta">
-                    </div>
+          <label class="description" for="ubicacion">Ubicación </label>
+          <div>
+            <input
+              id="ubicacion"
+              name="ubicacion"
+              class="element text small"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="nuevoPerrete.donde_esta"
+            />
+          </div>
 
-                    <label class="description" for="licencia">Licencia </label>
-                    <div>
-                        <div>
-
-                            <select class="element select medium" id="licencia" name="licencia"
-                                [(ngModel)]="nuevoPerrete.licencia">
-                                <option value="" selected="selected"></option>
-                                <option>Si</option>
-                                <option>No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <label class="description" for="fecha_nacimiento">Fecha nacimiento (dd/mm/aaaa) </label>
-                    <div>
-                        <input id="fecha_nacimiento" name="fecha_nacimiento" class="element text medium" type="text"
-                            maxlength="255" value="" [(ngModel)]="nuevoPerrete.fecha_nacimiento">
-                    </div>
-                    <label class="description" for="foto">Foto </label>
-                    <form name="subida-imagenes" type="POST" enctype="src\app\assets\imagenes">
-                        <input type="file" name="imagen" [(ngModel)]="nuevoPerrete.foto">
-                    </form>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="ms-0">
-                        <label class="description" for="ultima_desparasitacion">Fecha desparasitación (dd/mm/aaaa)
-                        </label>
-                        <div>
-                            <input id="ultima_desparasitacion" name="ultima_desparasitacion" class="element text medium"
-                                type="text" maxlength="255" value="" [(ngModel)]="nuevoPerrete.ultima_desparasitacion">
-                        </div>
-                        <label class="description" for="vacuna_rabia">Fecha vacuna rabia(dd/mm/aaaa) </label>
-                        <div>
-                            <input id="vacuna_rabia" name="vacuna_rabia" class="element text medium" type="text"
-                                maxlength="255" value="" [(ngModel)]="nuevoPerrete.vacuna_rabia">
-                        </div>
-                        <div>
-                            <label class="description" for="castrado">Castrado </label>
-                            <span>
-                                <select class="element select medium" id="castrado" name="castrado"
-                                    [(ngModel)]="nuevoPerrete.castrado">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="leishmaniasis">Leishmaniasis </label>
-                            <span>
-                                <select class="element select medium" id="leishmaniasis" name="leishmaniasis"
-                                    [(ngModel)]="nuevoPerrete.leishmaniasis">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="pendiente_operacion">Pendiente operar </label>
-                            <span>
-                                <select class="element select medium" id="pendiente_operacion"
-                                    name="pendiente_operacion" [(ngModel)]="nuevoPerrete.pendiente_operacion">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="enfermedades">Enfermedades </label>
-                            <span>
-                                <select class="element select medium" id="enfermedades" name="enfermedades"
-                                    [(ngModel)]="nuevoPerrete.enfermedades">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div>
-                            <label class="description" for="tratamiento">Tratamiento </label>
-                            <span>
-                                <select class="element select medium" id="tratamiento" name="tratamiento"
-                                    [(ngModel)]="nuevoPerrete.tratamiento">
-                                    <option value="" selected="selected"></option>
-                                    <option>Si</option>
-                                    <option>No</option>
-                                </select>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <input class="btn btn-success mb-2" id="saveForm" type="button" name="submit" value="Guardar datos"
-                (click)="guardarNuevoPerrete()">
-        </tr>
-    </tbody>
+          <label class="description" for="licencia">Licencia </label>
+          <div>
+            <div>
+              <select
+                class="element select medium"
+                id="licencia"
+                name="licencia"
+                [(ngModel)]="nuevoPerrete.licencia"
+              >
+                <option value="" selected="selected"></option>
+                <option>Si</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <label class="description" for="fecha_nacimiento"
+            >Fecha nacimiento (dd/mm/aaaa)
+          </label>
+          <div>
+            <input
+              id="fecha_nacimiento"
+              name="fecha_nacimiento"
+              class="element text medium"
+              type="text"
+              maxlength="255"
+              value=""
+              [(ngModel)]="nuevoPerrete.fecha_nacimiento"
+            />
+          </div>
+          <label class="description" for="foto">Foto </label>
+          <form
+            name="subida-imagenes"
+            type="POST"
+            enctype="src\app\assets\imagenes"
+          >
+            <input type="file" name="imagen" [(ngModel)]="nuevoPerrete.foto" />
+          </form>
+        </div>
+      </td>
+      <td>
+        <div class="">
+          <div class="ms-0">
+            <label class="description" for="ultima_desparasitacion"
+              >Fecha desparasitación (dd/mm/aaaa)
+            </label>
+            <div>
+              <input
+                id="ultima_desparasitacion"
+                name="ultima_desparasitacion"
+                class="element text medium"
+                type="text"
+                maxlength="255"
+                value=""
+                [(ngModel)]="nuevoPerrete.ultima_desparasitacion"
+              />
+            </div>
+            <label class="description" for="vacuna_rabia"
+              >Fecha vacuna rabia(dd/mm/aaaa)
+            </label>
+            <div>
+              <input
+                id="vacuna_rabia"
+                name="vacuna_rabia"
+                class="element text medium"
+                type="text"
+                maxlength="255"
+                value=""
+                [(ngModel)]="nuevoPerrete.vacuna_rabia"
+              />
+            </div>
+            <div>
+              <label class="description" for="castrado">Castrado </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="castrado"
+                  name="castrado"
+                  [(ngModel)]="nuevoPerrete.castrado"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="leishmaniasis"
+                >Leishmaniasis
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="leishmaniasis"
+                  name="leishmaniasis"
+                  [(ngModel)]="nuevoPerrete.leishmaniasis"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="pendiente_operacion"
+                >Pendiente operar
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="pendiente_operacion"
+                  name="pendiente_operacion"
+                  [(ngModel)]="nuevoPerrete.pendiente_operacion"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="enfermedades"
+                >Enfermedades
+              </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="enfermedades"
+                  name="enfermedades"
+                  [(ngModel)]="nuevoPerrete.enfermedades"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+            <div>
+              <label class="description" for="tratamiento">Tratamiento </label>
+              <span>
+                <select
+                  class="element select medium"
+                  id="tratamiento"
+                  name="tratamiento"
+                  [(ngModel)]="nuevoPerrete.tratamiento"
+                >
+                  <option value="" selected="selected"></option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <input
+        class="btn btn-success mb-2"
+        id="saveForm"
+        type="button"
+        name="submit"
+        value="Guardar datos"
+        (click)="guardarNuevoPerrete()"
+      />
+    </tr>
+  </tbody>
 </form>
 <!-- FIN Formulario añadir peludo -->
 <!-- Formulario quitar peludo -->
 <form class="table table-hover align-left mb-0 bg-white" *ngIf="quitar == true">
-    <thead class="bg-black">
-        <tr>
-            <th>Selecciona el perrete a quitar</th>
-            <th></th>
-            <th><button class="btn btn-danger mb-2" (click)="cerrarFormulario()">Cerrar formulario sin guardar</button>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <div class="">
-                    <label class="description" for="element_1">Nombre </label>
-                    <div>
-                        <tr *ngFor="let peludo of datos">
-                            <p class="">{{peludo.nombre    }}  <input class="btn btn-success mb-2" id="saveForm" type="submit" name="submit" value="Eliminar"
-                                (click)="quitarPerrete(peludo.idDatosPerros)">
-                            </p>
-                        </tr>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
+  <thead class="bg-black">
+    <tr>
+      <th>Selecciona el perrete a quitar</th>
+      <th></th>
+      <th>
+        <button class="btn btn-danger mb-2" (click)="cerrarFormulario()">
+          Cerrar formulario sin guardar
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="">
+          <label class="description" for="element_quitar">Nombre </label>
+          <div>
+            <tr *ngFor="let peludo of datos">
+              <p class="">
+                {{ peludo.nombre }}
+                <input
+                  class="btn btn-success mb-2"
+                  id="saveForm"
+                  type="submit"
+                  name="submit"
+                  value="Eliminar"
+                  (click)="quitarPerrete(peludo.idDatosPerros)"
+                />
+              </p>
+            </tr>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
 </form>
 <!-- FIN Formulario quitar peludo -->
