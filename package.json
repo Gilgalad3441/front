@@ -18,9 +18,11 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "angular-spinners": "^5.0.5",
     "autoprefixer": "^10.4.5",
     "bootstrap": "^4.0.0-beta.2",
     "json": "^11.0.0",
+    "ngx-spinner": "^14.0.0",
     "ngx-webstorage": "^10.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -28,7 +30,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.2",
+    "@angular-devkit/build-angular": "^14.0.6",
     "@angular/cli": "~14.0.2",
     "@angular/compiler-cli": "^14.0.0",
     "@types/jasmine": "~4.0.0",

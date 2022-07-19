@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-// Importo el archivo JSON
-import datos_peludos from 'src/assets/json/datos_peludos.json';
 import { DatosPerrosService } from 'src/app/app.service';
-import { DatosPerros } from './model/app.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //variables
 var isLicencia: string = '';
@@ -140,26 +138,35 @@ export class AppComponent {
   }
 
   //invocamos al api crearPerro
-  constructor(private DatosPerrosService: DatosPerrosService) {}
+  constructor(
+    private DatosPerrosService: DatosPerrosService,
+    private SpinnerService: NgxSpinnerService
+  ) {}
   guardarNuevoPerrete() {
     //Invocar endpoint crearPerro
+    this.SpinnerService.show('nuevoPerro');
     this.DatosPerrosService.crearPerro(this.nuevoPerrete).subscribe(
-      (response) => {}
+      (response) => {
+        this.SpinnerService.hide('nuevoPerro');
+        this.ngOnInit();
+      }
     );
     this.nuevoPerrete = {};
     this.datosPerros = true;
     this.aniadir = false;
     this.quitar = false;
     this.form = false;
-    this.mostrarPerros();
   }
 
   //Invocamos el endpoint listaPerros
   mostrarPerros() {
+    this.SpinnerService.show('mostrarPerro');
     var getResponse: any;
     getResponse = this.DatosPerrosService.listaPerros().subscribe(
       (response) => {
         this.datos = response;
+        this.SpinnerService.hide('mostrarPerro');
+        console.log(this.datos);
       }
     );
 
@@ -170,71 +177,49 @@ export class AppComponent {
   }
 
   quitarPerrete(idPerroBBDD: any) {
-    this.DatosPerrosService.borrarPerro(idPerroBBDD).subscribe(
-      (response) => {}
-    );
+    this.SpinnerService.show('quitarPerro');
+
+    this.DatosPerrosService.borrarPerro(idPerroBBDD).subscribe((response) => {
+      this.ngOnInit();
+      this.SpinnerService.hide('quitarPerro');
+    });
     this.form = false;
-    this.mostrarPerros();
+
     this.cerrarQuitario();
   }
 
   actualizarPerretes() {
-    if(this.actualizarPerrete && this.actualizarPerrete.nombre){
+    this.SpinnerService.show('actualizarperro');
+    if (this.actualizarPerrete && this.actualizarPerrete.nombre) {
       var getResponse: any;
       getResponse = this.DatosPerrosService.listaPerros().subscribe(
         (response) => {
+          this.SpinnerService.show('component');
           this.datos = response;
-          
           this.datos.forEach(
-            (element: { idDatosPerros: number; nombre: any}) => {
+            (element: { idDatosPerros: number; nombre: any }) => {
               if ((element.nombre = this.actualizarPerrete.nombre)) {
                 this.datoPerroActualizar = element;
                 this.actualizarPerrete.idDatosPerros = element.idDatosPerros;
-                this.comparaActualiza(element,this.actualizarPerrete);
+                this.comparaActualiza(element, this.actualizarPerrete);
                 this.DatosPerrosService.actualizarPerro(
                   element.idDatosPerros,
                   this.actualizarPerrete
                 ).subscribe((response) => {});
                 this.actualizarPerrete.nombre = '';
                 this.form = false;
+                this.ngOnInit();
               }
             }
           );
+          this.ngOnInit();
+          this.SpinnerService.hide('actualizarperro');
         }
       );
     }
     this.form = false;
-    this.mostrarPerros();
     this.cerrarQuitario();
   }
 
-  comparaActualiza(datosPerros: any, datosNuevos: any){
-
-
-
-
-  }
-
-  perrosById() {
-    if(this.actualizarPerrete && this.actualizarPerrete.nombre){
-    var getResponse: any;
-    getResponse = this.DatosPerrosService.listaPerros().subscribe(
-      (response) => {
-        this.datos = response;
-
-        this.datos.forEach(
-          (element: { idDatosPerros: number; nombre: any }) => {
-            if ((element.nombre = this.actualizarPerrete.nombre)) {
-              this.DatosPerrosService.perrosById(
-                element.idDatosPerros
-              ).subscribe((response) => {});
-              this.actualizarPerrete.nombre = '';
-              this.form = false;
-            }
-          }
-        );
-      }
-    );
-  }
-  }
+  comparaActualiza(datosPerros: any, datosNuevos: any) {}
 }
