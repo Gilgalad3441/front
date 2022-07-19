@@ -69,14 +69,14 @@
       <td>
         <div class="">
           <div class="ms-0">
-            <img
+            <!-- <img
               align="left"
               src="./assets/imagenes/logo.jpg"
               alt=""
               style="width: 200px; height: 200px"
               class="rounded-circle"
-            />
-            <div align="right" class="ms-1 align-items-center">
+            />-->
+            <div align="left" class="ms-1 align-items-center">
               <p class="">
                 {{ peludo.nombre }} - {{ peludo.raza }} -
                 {{ peludo.donde_esta }}
@@ -166,20 +166,8 @@
               </option>
             </select>
           </div>
-          <label class="description" for="nombre">Nombre </label>
-          <div>
-            <input
-              id="nombre"
-              name="nombre"
-              class="element text medium"
-              type="text"
-              maxlength="255"
-              value="nombre"
-              [(ngModel)]="actualizarPerrete.nombre"
-            />
-          </div>
-
-          <label class="description" for="raza">Raza </label>
+          
+          <label class="description" for="raza" >Raza </label>
           <div>
             <input
               id="raza"
@@ -187,9 +175,9 @@
               class="element text medium"
               type="text"
               maxlength="255"
-              value="raza"
+              value="actualizarPerrete.raza"
               [(ngModel)]="actualizarPerrete.raza"
-              placeholder="this.datoPerroActualizar.raza"
+              
             />
           </div>
           <label class="description" for="numero_chip">Chip </label>
@@ -245,7 +233,7 @@
               [(ngModel)]="actualizarPerrete.fecha_nacimiento"
             />
           </div>
-          <label class="description" for="foto">Foto </label>
+          <!--<label class="description" for="foto">Foto </label>
           <form
             name="subida-imagenes"
             type="POST"
@@ -253,7 +241,7 @@
             [(ngModel)]="actualizarPerrete.foto"
           >
             <input type="file" name="imagen" />
-          </form>
+          </form>-->
         </div>
       </td>
       <td>
@@ -381,6 +369,7 @@
         name="submit"
         value="Guardar datos"
         (click)="actualizarPerretes()"
+        (click)="mostrarPerros()"
       />
     </tr>
   </tbody>
@@ -487,14 +476,14 @@
               [(ngModel)]="nuevoPerrete.fecha_nacimiento"
             />
           </div>
-          <label class="description" for="foto">Foto </label>
+          <!--<label class="description" for="foto">Foto </label>
           <form
             name="subida-imagenes"
             type="POST"
             enctype="src\app\assets\imagenes"
           >
             <input type="file" name="imagen" [(ngModel)]="nuevoPerrete.foto" />
-          </form>
+          </form>-->
         </div>
       </td>
       <td>
@@ -693,5 +682,5 @@
   
   name="actualizarperro"
 >
-<p style="color: white">Espere mientras actulalizamos la BBDD...</p>
+<p style="color: white">Espere mientras actualizamos la BBDD...</p>
 </ngx-spinner>

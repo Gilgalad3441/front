@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { map, Observable, Subject } from 'rxjs';
+import { Observable} from 'rxjs';
 
 import { DatosPerros } from 'src/app/model/app.model';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,11 +17,11 @@ export class DatosPerrosService {
   postResponse: string | undefined;
 
   
-  constructor(private http: HttpClient, private SpinnerService: NgxSpinnerService) { }
+  constructor(private http: HttpClient, ) { }
 
   public listaPerros(): Observable<DatosPerros[]> {
     return this.http.get<DatosPerros[]>(`${this.baseUrl}/listaDatosPerros`);
-    this.SpinnerService.hide('mostrarPerro');
+    
   }
 
   public perrosById(idDatosPerros: number): Observable<DatosPerros> {

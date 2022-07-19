@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatosPerrosService } from 'src/app/app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { Observable, interval } from 'rxjs';
 //variables
 var isLicencia: string = '';
 var isCastrado: string = '';
@@ -37,12 +37,11 @@ export class AppComponent {
   nuevoPerrete: any = {};
   actualizarPerrete: any = {};
   datoPerroActualizar: any = [];
-
+  perro: boolean | undefined = false; 
   idPerroBBDD: any;
   idPerroBBDDActualizar: any;
-  ngOnInit() {
-    this.mostrarPerros();
-  }
+  products: Observable<any> | undefined;
+  
 
   licencia(licencia: any) {
     if (licencia && licencia.toLowerCase() === 'si') {
@@ -142,20 +141,23 @@ export class AppComponent {
     private DatosPerrosService: DatosPerrosService,
     private SpinnerService: NgxSpinnerService
   ) {}
+  ngOnInit() {
+    this.mostrarPerros();
+  }
   guardarNuevoPerrete() {
     //Invocar endpoint crearPerro
     this.SpinnerService.show('nuevoPerro');
     this.DatosPerrosService.crearPerro(this.nuevoPerrete).subscribe(
       (response) => {
         this.SpinnerService.hide('nuevoPerro');
-        this.ngOnInit();
+        this.mostrarPerros();
+        this.nuevoPerrete = {};
+        this.datosPerros = true;
+        this.aniadir = false;
+        this.quitar = false;
+        this.form = false;
       }
     );
-    this.nuevoPerrete = {};
-    this.datosPerros = true;
-    this.aniadir = false;
-    this.quitar = false;
-    this.form = false;
   }
 
   //Invocamos el endpoint listaPerros
@@ -167,25 +169,23 @@ export class AppComponent {
         this.datos = response;
         this.SpinnerService.hide('mostrarPerro');
         console.log(this.datos);
+        
+        this.form = false;
+        this.quitar = false;
+        this.aniadir = false;
+        this.datosPerros = true;
       }
     );
-
-    this.datosPerros = true;
-    this.form = false;
-    this.quitar = false;
-    this.aniadir = false;
   }
 
   quitarPerrete(idPerroBBDD: any) {
     this.SpinnerService.show('quitarPerro');
 
     this.DatosPerrosService.borrarPerro(idPerroBBDD).subscribe((response) => {
-      this.ngOnInit();
+      this.mostrarPerros();
       this.SpinnerService.hide('quitarPerro');
+      this.cerrarQuitario();
     });
-    this.form = false;
-
-    this.cerrarQuitario();
   }
 
   actualizarPerretes() {
@@ -201,6 +201,7 @@ export class AppComponent {
               if ((element.nombre = this.actualizarPerrete.nombre)) {
                 this.datoPerroActualizar = element;
                 this.actualizarPerrete.idDatosPerros = element.idDatosPerros;
+                this.perro = true
                 this.comparaActualiza(element, this.actualizarPerrete);
                 this.DatosPerrosService.actualizarPerro(
                   element.idDatosPerros,
@@ -208,18 +209,63 @@ export class AppComponent {
                 ).subscribe((response) => {});
                 this.actualizarPerrete.nombre = '';
                 this.form = false;
-                this.ngOnInit();
+                
               }
+              
             }
           );
-          this.ngOnInit();
-          this.SpinnerService.hide('actualizarperro');
+          this.mostrarPerros();
+          this.form = false;
+          this.cerrarQuitario();
+          this.SpinnerService.hide('actualizarperro');          
         }
       );
+      
     }
-    this.form = false;
-    this.cerrarQuitario();
+    
   }
 
-  comparaActualiza(datosPerros: any, datosNuevos: any) {}
+  comparaActualiza(response: any, datosNuevos: any) {
+
+      datosNuevos.foto = response.foto ? response.foto :""
+      if(datosNuevos.foto == undefined){
+        
+      }
+      if(datosNuevos.donde_esta == undefined){
+        datosNuevos.donde_esta = response.donde_esta
+      }
+      if(datosNuevos.numero_chip == undefined){
+        datosNuevos.numero_chip = response.numero_chip
+      }
+      if(datosNuevos.fecha_nacimiento == undefined){
+        datosNuevos.fecha_nacimiento = response.fecha_nacimiento
+      }
+      if(datosNuevos.licencia == undefined){
+        datosNuevos.licencia = response.licencia
+      }
+      if(datosNuevos.raza == undefined){
+        datosNuevos.raza = response.raza
+      }
+      if(datosNuevos.castrado == undefined){
+        datosNuevos.castrado = response.castrado
+      }
+      if(datosNuevos.ultima_desparasitacion == undefined){
+        datosNuevos.ultima_desparasitacion = response.ultima_desparasitacion
+      }
+      if(datosNuevos.vacuna_rabia == undefined){
+        datosNuevos.vacuna_rabia = response.vacuna_rabia
+      }
+      if(datosNuevos.leishmaniasis == undefined){
+        datosNuevos.leishmaniasis = response.leishmaniasis
+      }
+      if(datosNuevos.pendiente_operacion == undefined){
+        datosNuevos.pendiente_operacion = response.pendiente_operacion
+      }
+      if(datosNuevos.enfermedades == undefined){
+        datosNuevos.enfermedades = response.enfermedades
+      }
+      if(datosNuevos.tratamiento == undefined){
+        datosNuevos.tratamiento = response.tratamiento
+      }
+  }
 }
