@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DatosPerrosService } from 'src/app/app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs/internal/Observable';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 //variables
 var isLicencia: string = '';
@@ -42,7 +42,7 @@ export class AppComponent {
   actualizarPerrete: any = {};
   datoPerroActualizar: any = [];
   altperr: any = [];
-  mostrarAlerta: any = [] ;
+  mostrarAlerta: any = [];
   perro: boolean | undefined = false;
   idPerroBBDD: any;
   idPerroBBDDActualizar: any;
@@ -103,7 +103,7 @@ export class AppComponent {
 
   //Lógica para pintar los distintos formularios
   modificarPeludo() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.datosPerros = false;
     this.form = true;
     this.quitar = false;
@@ -112,7 +112,7 @@ export class AppComponent {
   }
 
   aniadirPeludo() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.form = false;
     this.datosPerros = false;
     this.quitar = false;
@@ -120,7 +120,7 @@ export class AppComponent {
     this.alerta = false;
   }
   quitarPeludo() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.form = false;
     this.datosPerros = false;
     this.aniadir = false;
@@ -129,7 +129,7 @@ export class AppComponent {
   }
 
   cerrarFormulario() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.datosPerros = true;
     this.aniadir = false;
     this.quitar = false;
@@ -138,7 +138,7 @@ export class AppComponent {
   }
 
   cerrarAniadir() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.datosPerros = true;
     this.aniadir = false;
     this.quitar = false;
@@ -147,13 +147,12 @@ export class AppComponent {
   }
 
   cerrarQuitario() {
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.datosPerros = true;
     this.aniadir = false;
     this.quitar = false;
     this.form = false;
     this.alerta = false;
-
   }
   alertaPeludo() {
     this.datosPerros = false;
@@ -161,7 +160,7 @@ export class AppComponent {
     this.quitar = false;
     this.aniadir = false;
     this.alerta = true;
-    this.mostrarAlerta = []
+    this.mostrarAlerta = [];
     this.alertasppp();
   }
 
@@ -300,7 +299,7 @@ export class AppComponent {
 
   //Métodos sessionStorage
   savelistaPppeludos(_datos: any) {
-    sessionStorage.setItem('listaPppeludos', JSON.stringify(_datos)|| "[]");
+    sessionStorage.setItem('listaPppeludos', JSON.stringify(_datos) || '[]');
   }
   getlistaPppeludos() {
     return sessionStorage.getItem('listaPppeludos');
@@ -309,7 +308,7 @@ export class AppComponent {
     sessionStorage.removeItem('listaPppeludos');
   }
   saveAlertas(_datos: any) {
-    sessionStorage.setItem('alertas', JSON.stringify(_datos)|| "[]");
+    sessionStorage.setItem('alertas', JSON.stringify(_datos) || '[]');
   }
   getAlertas() {
     return sessionStorage.getItem('alertas');
@@ -318,21 +317,21 @@ export class AppComponent {
     sessionStorage.removeItem('alertas');
   }
 
-  comparaFechas(fecha:any){
-    let esMayor : boolean = false;
+  comparaFechas(fecha: any) {
+    let esMayor: boolean = false;
     let fechaComparar: any;
-    if (fecha != null){
-      let arrayFecha = fecha.split("/");
-      let formatFechaComparar = arrayFecha[1] + '/' + arrayFecha[0] + '/' + arrayFecha[2];
-      fechaComparar  = (new Date(Date.parse(formatFechaComparar))).getTime();
-    
+    if (fecha != null) {
+      let arrayFecha = fecha.split('/');
+      let formatFechaComparar =
+        arrayFecha[1] + '/' + arrayFecha[0] + '/' + arrayFecha[2];
+      fechaComparar = new Date(Date.parse(formatFechaComparar)).getTime();
     }
-   
-    let today = (new Date(Date.parse(Date()))).getTime();
+
+    let today = new Date(Date.parse(Date())).getTime();
     if (fechaComparar && fechaComparar > today) {
-      esMayor = true
-    } 
-    return esMayor
+      esMayor = true;
+    }
+    return esMayor;
   }
 
   alertasppp() {
@@ -347,8 +346,8 @@ export class AppComponent {
             vacuna_rabia: any;
           }) => {
             let alertasPerros = [];
-            let alDia = "Al día"
-            let pendienteVacuna = "Pendiente"
+            let alDia = 'Al día';
+            let pendienteVacuna = 'Pendiente';
             if (this.comparaFechas(element.vacuna_rabia)) {
               alertasPerros.push(alDia);
             } else {
@@ -359,18 +358,11 @@ export class AppComponent {
             } else {
               alertasPerros.push(pendienteVacuna);
             }
-            //alertasPerros.push(ultima_desparasitacion);
-            //alertasPerros.push(vacuna_rabia);
             alertasPerros.push(element.nombre);
-            
             this.mostrarAlerta.push(alertasPerros);
-            //this.saveAlertas(this.mostrarAlerta);
-            //this.alertasppp();
           }
         );
       }
     );
   }
-
-  
 }
