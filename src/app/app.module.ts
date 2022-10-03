@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { NgxSpinnerModule } from "ngx-spinner"; 
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgxSpinnerModule
 
   ],
-  providers: [],
+  providers: [
+    
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 
