@@ -156,11 +156,15 @@
         </p>
       </td>
       <td>
-        <p class="fw-normal mb-1">
-          Fecha desparasitacion: {{ alerta[1] }}
+        <p class=""></p>
+        
+        Fecha desparasitacion: <p [ngClass]="classAlert(alerta[1])">
+          {{ alerta[1] }}
         </p>
-        <p class="fw-normal mb-1">
-          Fecha vacuna rabia: {{ alerta[0] }}
+        <p class=""></p>
+        
+        Fecha vacuna rabia: <p [ngClass]="classAlert(alerta[0])">
+          {{ alerta[0] }}
         </p>
       </td>
     </tr>
@@ -485,7 +489,7 @@
           <label class="description" for="raza">Raza </label>
           <div>
             <input
-              id="raza"
+              
               name="raza"
               class="element text medium"
               type="text"
@@ -547,15 +551,6 @@
               [(ngModel)]="actualizarPerrete.fecha_nacimiento"
             />
           </div>
-          <!--<label class="description" for="foto">Foto </label>
-          <form
-            name="subida-imagenes"
-            type="POST"
-            enctype="src\app\assets\imagenes"
-            [(ngModel)]="actualizarPerrete.foto"
-          >
-            <input type="file" name="imagen" />
-          </form>-->
         </div>
       </td>
       <td>

@@ -12,6 +12,7 @@ var isOperar: string = '';
 var isEnfermedades: string = '';
 var isTratamiento: string = '';
 var isCastrado: string = '';
+var classAlert: string = '';
 
 @Component({
   selector: 'app-root',
@@ -100,9 +101,19 @@ export class AppComponent {
     }
     return isTratamiento;
   }
+  classAlert(alerta: any) {
+
+    if (alerta === 'Pendiente') {
+      classAlert = 'badge badge-danger  rounded-pill d-inline';
+    } else {
+      classAlert = 'badge badge-success  rounded-pill d-inline';
+    }
+    return classAlert;
+  }
 
   //Lógica para pintar los distintos formularios
   modificarPeludo() {
+    
     this.mostrarAlerta = [];
     this.datosPerros = false;
     this.form = true;
@@ -111,7 +122,7 @@ export class AppComponent {
     this.alerta = false;
   }
 
-  aniadirPeludo() {
+  aniadirPeludo() {    
     this.mostrarAlerta = [];
     this.form = false;
     this.datosPerros = false;
@@ -221,6 +232,7 @@ export class AppComponent {
   }
 
   actualizarPerretes() {
+    this.datos = {};
     this.SpinnerService.show('actualizarperro');
     if (this.actualizarPerrete && this.actualizarPerrete.nombre) {
       var getResponse: any;
@@ -241,13 +253,14 @@ export class AppComponent {
                 ).subscribe((response: any) => {
                   this.mostrarPerros();
                 });
-                this.actualizarPerrete.nombre = '';
+                this.actualizarPerrete = {};
                 this.form = false;
               }
             }
           );
 
           this.form = false;
+          
           this.cerrarQuitario();
           this.SpinnerService.hide('actualizarperro');
         }
